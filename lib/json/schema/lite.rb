@@ -11,7 +11,7 @@ module JSON
           if definition.is_a? Hash
             definition.each_pair do |k, v|
               if k.to_s == 'properties' || option[:properties]
-                v[:option] = { properties: true } if v.is_a? Hash
+                v[:option] = { properties: true } if v.is_a?(Hash) && v[:properties].nil?
                 json_schema[k] = define v
               else
                 json_schema[k] = v
