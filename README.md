@@ -31,9 +31,7 @@ JSON::Schema::Lite.generate type: :object,
         name: :string,
       }
     },
-    tags: [
-      type: :string
-    ],
+    tags: [:string],
     related: [
       type: :object,
       properties: {

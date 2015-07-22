@@ -17,9 +17,7 @@ describe JSON::Schema::Lite do
             name: :string,
           }
         },
-        tags: [
-          type: :string
-        ],
+        tags: [:string],
         related: [
           type: :object,
           properties: {
