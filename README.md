@@ -25,6 +25,12 @@ JSON::Schema::Lite.generate type: :object,
     title: :string,
     body: :string,
     vote: :number,
+    author: {
+      type: :object,
+      properties: {
+        name: :string,
+      }
+    },
     tags: [
       type: :string
     ],
@@ -45,6 +51,12 @@ JSON::Schema::Lite.generate type: :object,
     "title": { "type": "string" },
     "body": { "type": "string" },
     "vote": { "type": "number" },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" }
+      }
+    },
     "tags": {
       "type": "array",
       "items": {
