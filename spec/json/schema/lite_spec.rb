@@ -11,6 +11,12 @@ describe JSON::Schema::Lite do
         title: :string,
         body: :string,
         vote: :number,
+        author: {
+          type: :object,
+          properties: {
+            name: :string,
+          }
+        },
         tags: [
           type: :string
         ],
@@ -32,6 +38,12 @@ describe JSON::Schema::Lite do
         title: { type: :string },
         body: { type: :string },
         vote: { type: :number },
+        author: {
+          type: :object,
+          properties: {
+            name: { type: :string }
+          }
+        },
         tags: {
           type: :array,
           items: {
@@ -56,6 +68,7 @@ describe JSON::Schema::Lite do
       title: 'title',
       body: 'texttexttext',
       vote: 20,
+      author: { name: 'author_name' },
       tags: ['tag1', 'tag2'],
       related: [
         { title: 'related1' },
