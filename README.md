@@ -18,6 +18,23 @@ Or install it yourself as:
 
 ## Usage
 
+- generate by block
+```ruby
+JSON::Schema::Lite.generate do
+  string :title, required: true
+  string :body, required: true
+  number :vote
+  object :author do
+    string :name
+  end
+  array :tags, :string
+  array :related do
+    string :title
+  end
+end
+```
+
+- generate by object
 ```ruby
 JSON::Schema::Lite.generate type: :object,
   required: [:title, :body],
@@ -41,6 +58,7 @@ JSON::Schema::Lite.generate type: :object,
   }
 ```
 
+- generated json schema
 ```json
 {
   "type": "object",
@@ -58,7 +76,7 @@ JSON::Schema::Lite.generate type: :object,
     "tags": {
       "type": "array",
       "items": {
-        "type": "string" 
+        "type": "string"
       }
     },
     "related": {
@@ -88,4 +106,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/munky6
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
