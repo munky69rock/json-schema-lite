@@ -6,7 +6,7 @@ describe JSON::Schema::Lite do
   let(:expected) do
     {
         type: :object,
-        required: [:title, :body],
+        required: [:title, :body, :author],
         properties: {
             title: { type: :string },
             body: { type: :string },
@@ -59,7 +59,7 @@ describe JSON::Schema::Lite do
     let(:definition) do
       {
           type: :object,
-          required: [:title, :body],
+          required: [:title, :body, :author],
           properties: {
               title: :string,
               body: :string,
@@ -96,7 +96,7 @@ describe JSON::Schema::Lite do
         string :title, required: true
         string :body, required: true
         number :vote
-        object :author do
+        object :author, required: true do
           string :name
         end
         array :tags, :string
@@ -111,7 +111,7 @@ describe JSON::Schema::Lite do
         string :title, required: true
         string :body, required: true
         number :vote
-        object :author do
+        object :author, required: true do
           string :name
         end
         array :tags, :string
@@ -122,18 +122,7 @@ describe JSON::Schema::Lite do
     end
 
     it 'returns json schema object' do
-      expect(JSON::Schema::Lite.define {
-               string :title, required: true
-               string :body, required: true
-               number :vote
-               object :author do
-                 string :name
-               end
-               array :tags, :string
-               array :related do
-                 string :title
-               end
-             }).to eql expected
+      expect(schema_obj).to eql expected
     end
 
     it 'returns valid json schema' do

@@ -30,8 +30,9 @@ module JSON
           set_properties key, prop
         end
 
-        def object(key, &block)
+        def object(key, option = {}, &block)
           set_properties key, self.class.new(&block)
+          add_required key if option[:required]
         end
 
         private
