@@ -1,33 +1,25 @@
-require 'json/schema/lite/version'
 require 'json'
+require 'json/schema/lite/version'
+require 'json/schema/lite/block'
+require 'json/schema/lite/object'
 
 module JSON
   class Schema
     module Lite
-      def self.define(definition)
-        option = definition.is_a?(Hash) ? definition.delete(:option) || {} : {}
-
-        {}.tap do |json_schema|
-          if definition.is_a? Hash
-            definition.each_pair do |k, v|
-              if k.to_s == 'properties' || option[:properties]
-                v[:option] = { properties: true } if v.is_a?(Hash) && v[:properties].nil?
-                json_schema[k] = define v
-              else
-                json_schema[k] = v
-              end
-            end
-          elsif definition.is_a? Array
-            json_schema[:type] = :array
-            json_schema[:items] = define definition[0]
-          else
-            json_schema[:type] = definition
-          end
+      def self.define(definition = nil, &block)
+        if block_given?
+          Block.new &block
+        else
+          Object.define definition
         end
       end
 
-      def self.generate(definition)
-        define(definition).to_json
+      def self.generate(definition = nil, &block)
+        if block_given?
+          define(&block).to_json
+        else
+          define(definition).to_json
+        end
       end
     end
   end
