@@ -20,12 +20,14 @@ module JSON
           }
           if block_given?
             prop[:items] = self.class.new(&block)
+            opt_index = 0
           else
             prop[:items] = { type: args[0] }
-            if args.size >= 2 && args[1].is_a?(Hash)
-              option = args[1]
-              add_required key if option[:required]
-            end
+            opt_index = 1
+          end
+          if args[opt_index].is_a?(Hash)
+            option = args[opt_index]
+            add_required key if option[:required]
           end
           set_properties key, prop
         end
