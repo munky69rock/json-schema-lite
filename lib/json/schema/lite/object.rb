@@ -16,8 +16,12 @@ module JSON
                 end
               end
             elsif definition.is_a? Array
-              json_schema[:type] = :array
-              json_schema[:items] = define definition[0]
+              if definition.size == 1
+                json_schema[:type] = :array
+                json_schema[:items] = define definition[0]
+              else
+                json_schema[:anyOf] = definition.map { |d| { type: d } }
+              end
             else
               json_schema[:type] = definition
             end
