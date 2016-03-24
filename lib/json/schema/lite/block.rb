@@ -7,9 +7,9 @@ module JSON
           self.instance_eval &block
         end
 
-        %w(string number boolean null).each do |method|
+        %i(string number boolean null).each do |method|
           define_method method do |key, option = {}|
-            set_properties key, __method__
+            set_properties key, option[:allow_null] ? { anyOf: [{ type: method }, { type: :null }] } : method
             add_required key if option[:required]
           end
         end

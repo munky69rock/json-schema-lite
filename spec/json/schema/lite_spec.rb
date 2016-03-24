@@ -11,6 +11,12 @@ describe JSON::Schema::Lite do
             title: { type: :string },
             body: { type: :string },
             vote: { type: :number },
+            priority: {
+              anyOf: [
+                { type: :number },
+                { type: :null },
+              ]
+            },
             author: {
                 type: :object,
                 properties: {
@@ -58,6 +64,7 @@ describe JSON::Schema::Lite do
         title: 'title',
         body: 'texttexttext',
         vote: 20,
+        priority: nil,
         author: {
             name: 'author_name',
             followers: [
@@ -87,6 +94,7 @@ describe JSON::Schema::Lite do
               title: :string,
               body: :string,
               vote: :number,
+              priority: [:number, :null],
               author: {
                   type: :object,
                   properties: {
@@ -126,6 +134,7 @@ describe JSON::Schema::Lite do
         string :title, required: true
         string :body, required: true
         number :vote
+        number :priority, allow_null: true
         object :author, required: true do
           string :name
           array :followers do
@@ -145,6 +154,7 @@ describe JSON::Schema::Lite do
         string :title, required: true
         string :body, required: true
         number :vote
+        number :priority, allow_null: true
         object :author, required: true do
           string :name
           array :followers do
